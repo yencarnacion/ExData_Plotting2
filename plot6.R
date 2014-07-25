@@ -15,6 +15,12 @@ losangelesdata<-tidydata2[tidydata2$fips == "06037",]
 wanteddata<-rbind(baltimorecitydata,losangelesdata)
 wanteddata$fips<-factor(wanteddata$fips, levels=c("24510","06037"), labels=c("Baltimore City", "Los Angeles"))
 
-qplot(year,Emissions, data=wanteddata,geom="line",color=fips, ylab="Emissions (in tons)")
+library(ggplot2)
+
+png("plot6.png")
+
+print(qplot(year,Emissions, data=wanteddata,geom="line",color=fips, ylab="Emissions (in tons)"))
+
+dev.off()
 
 

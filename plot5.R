@@ -10,5 +10,9 @@ tidydata<-NEI[NEI$SCC %in% vehiclebasedscc$SCC,]
 tidydata2<-aggregate(Emissions ~ year + fips,data = tidydata,FUN=sum)
 wanteddata<-tidydata2[tidydata2$fips == "24510",]
 
-with(wanteddata, plot(year, Emissions, type="l", ylab=expression('PM'[2.5]*' emission from Motor Vehicle Sources (in 1000 tons) in Baltimore City'), xlab="year"))
+png("plot5.png")
+
+with(wanteddata, plot(year, Emissions, type="l", ylab=expression('PM'[2.5]*' emission from Motor Vehicle Sources (in tons) in Baltimore City'), xlab="year"))
+
+dev.off()
 

@@ -10,7 +10,11 @@ SCC <- readRDS("Source_Classification_Code.rds")
 tidydata<-aggregate(Emissions ~ year + fips + type,data = NEI,FUN=sum)
 wanteddata<-tidydata[tidydata$fips == "24510",]
 
+
 library(ggplot2)
 
-qplot(year,Emissions, data=wanteddata,geom="line",color=type, ylab="Emissions (in tons)")
+png("plot3.png")
 
+print(qplot(year,Emissions, data=wanteddata,geom="line",color=type, ylab="Emissions (in tons) in Baltimore City"))
+
+dev.off()

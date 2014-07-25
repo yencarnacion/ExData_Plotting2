@@ -9,4 +9,8 @@ SCC <- readRDS("Source_Classification_Code.rds")
 tidydata<-aggregate(Emissions ~ year,data = NEI,FUN=sum)
 tidydata$EmissionsDivided<-tidydata$Emissions / 1000
 
+png('plot1.png')
+
 with(tidydata, plot(year, EmissionsDivided, type="l", ylab=expression('PM'[2.5]*' emission from all sources (in 1000 tons)'), xlab="year"))
+
+dev.off()

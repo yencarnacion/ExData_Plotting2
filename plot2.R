@@ -8,4 +8,8 @@ SCC <- readRDS("Source_Classification_Code.rds")
 tidydata<-aggregate(Emissions ~ year + fips,data = NEI,FUN=sum)
 wanteddata<-tidydata[tidydata$fips == "24510",]
 
+png('plot2.png')
+
 with(wanteddata, plot(year, Emissions, type="l", ylab=expression('PM'[2.5]*' emission from all sources (in tons) in Baltimore City'), xlab="year"))
+
+dev.off()

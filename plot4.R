@@ -4,10 +4,14 @@
 NEI <- readRDS("summarySCC_PM25.rds")
 SCC <- readRDS("Source_Classification_Code.rds")
 
-coalbasedscc<-SCC[c(grep("[Cc][Oo][Aa][Ll]", SCC$Short.Name)),]
-tidydata<-NEI[NEI$SCC %in% coalbasedscc$SCC,]
+coalbasedcombscc<-SCC[intersect(grep("Comb", SCC$Short.Name, value=FALSE),grep("Coal", SCC$Short.Name, value=FALSE)),]
+
+tidydata<-NEI[NEI$SCC %in% coalbasedcombscc$SCC,]
 wanteddata<-aggregate(Emissions ~ year,data = tidydata,FUN=sum)
 wanteddata$EmissionsDivided<-wanteddata$Emissions/1000
 
-with(wanteddata, plot(year, EmissionsDivided, type="l", ylab=expression('PM'[2.5]*' emission from coal sources (in 1000 tons)'), xlab="year"))
+png('plot4.png')
 
+with(wanteddata, plot(year, EmissionsDivided, type="l", ylab=expression('PM'[2.5]*' emission from coal combustions-related sources (in 1000 tons)'), xlab="year"))
+
+dev.off()
